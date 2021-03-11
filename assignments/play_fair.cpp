@@ -10,7 +10,7 @@ typedef pair<int, int> pii;
  * Too many mind, no mind. 
  * 
  * */ 
-pii find(char c, vector<vector<char>> &key) { 
+pii find(char c, vector<vector<char>> &key) { //finds character's position in key matrix
 	for (int i = 0; i < 5; ++i) { 
 		for (int j = 0; j < 5; ++j) { 
 			if (key[i][j] == c) return {i, j}; 
@@ -18,7 +18,8 @@ pii find(char c, vector<vector<char>> &key) {
 	} 
 	return {-1, -1}; 
 } 
-void decrypt(vector <char> &text, vector<vector<char>> &key) { 
+void change(vector <char> &text, vector<vector<char>> &key, int par) { //1 encrypts or 0 decrypts 
+	//fun fact: encrypting and decrypting proccess is the same, just looks for opposite diagonal 
 	for (int i = 0; i + 1 < text.size(); i += 2) {
 		char a = text[i], b = text[i + 1]; 
 		if (a == 'J') a = 'I'; 
@@ -62,17 +63,19 @@ int main(){
 			pos++;
 		}
 	}
-	cout << "Enter the text to encrypt: " << endl;
+	cout << "Enter the text: " << endl;
 	getline(cin, s);
 	vector <char> text;
+	cout << "Enter 1 for encrypting or 0 for decrypting: " << endl;
+	int par; cin >> par;
 	for (int i = 0; i < s.size(); ++i) {
 		if (s[i] == ' ') continue;//Elimnates spaces
 		if (s[i] > 'Z') s[i] -= 'a' - 'A';//Capitalized all characters
-		if (i && s[i - 1] == s[i]) text.push_back(s[i] == 'X' ? 'Y' : 'X');//Adds padding if needed
+		if (par && i && s[i - 1] == s[i]) text.push_back(s[i] == 'X' ? 'Y' : 'X');//Adds padding if needed, only needed when encrypting
 		text.push_back(s[i]);
 	}
 	if (text.size() & 1) text.push_back('X');//Adds padding if needed
-	decrypt(text, key); 
+	change(text, key, par); 
 	return 0; 
 }
 
