@@ -21,7 +21,7 @@ def build(text): #Builds the key matrix using text
                 key.append([])
     key.pop(-1)
     return key
-def find(key, c):
+def find(key, c): #returns row and columns of character c
     for i in range(0, len(key)):
         for j in range(0, len(key[i])):
             if (key[i][j] == c):
@@ -50,14 +50,16 @@ def __main__ ():
     text = text.upper()
     text = text.replace(' ', '')
     text = text.replace('J', 'I')
+    auxText = text
+    print(text)
     for i in range(1, len(text)):
         if text[i] == text[i - 1]:
-            text = text[0:i] + ('X' if text[i] != 'Y' else 'X') + text[i]
+            auxText = text[0:i] + ('X' if text[i] != 'Y' else 'X') + text[i:]
+    text = auxText
     if (len(text) % 2 == 1):
         text += ('X' if text[-1] != 'Y' else 'X')
     for i in key:
         print(i)
-    print(text)
     print(endecrypt(text, key, par))
 __main__()
 
