@@ -31,8 +31,8 @@ def endecrypt(text, key, par):
     add = 1 if par == 1 else -1
     ans = ''
     for i in range(1, len(text), 2):
-        row1, col1 = find(key, text[i])
-        row2, col2 = find(key, text[i - 1])
+        row2, col2 = find(key, text[i])
+        row1, col1 = find(key, text[i - 1])
         if (row1 == row2):
             ans += key[row1][(col1 + add + 5) % 5] + key[row2][(col2 + add + 5) % 5]
         elif (col1 == col2):
@@ -50,12 +50,12 @@ def __main__ ():
     text = text.upper()
     text = text.replace(' ', '')
     text = text.replace('J', 'I')
-    auxText = text
-    print(text)
-    for i in range(1, len(text)):
-        if text[i] == text[i - 1]:
-            auxText = text[0:i] + ('X' if text[i] != 'Y' else 'X') + text[i:]
-    text = auxText
+    if par == 1:
+        auxText = text
+        for i in range(1, len(text)):
+            if text[i] == text[i - 1]:
+                auxText = text[0:i] + ('X' if text[i] != 'Y' else 'X') + text[i:]
+        text = auxText
     if (len(text) % 2 == 1):
         text += ('X' if text[-1] != 'Y' else 'X')
     for i in key:
