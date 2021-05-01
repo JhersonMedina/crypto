@@ -10,10 +10,11 @@ def endecrypt(text, k, par):
     return ans
 def __main__ ():
     text = input('Enter the text: ')
-    k = int(input('Enter K parameter: '))
     par = int(input('Enter 1 for encrypting, 0 for decrypting: '))
-    text = text.replace(' ', '')
-    text = text.upper()
-    print(endecrypt(text, k, par))
+    for k in range(26):
+        #k = int(input('Enter K parameter: '))
+        text = text.replace(' ', '')
+        text = text.upper()
+        print(endecrypt(text, k, par))
 __main__()
 
