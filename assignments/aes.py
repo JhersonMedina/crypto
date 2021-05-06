@@ -28,6 +28,7 @@ def __main__():
     pic = open("image.txt", "w")
     pic.write(encoded)
     pic.close()
+
     pic = open("image.txt", "r")
     encryptedImage = base64.b64decode(pic.read())
     pic.close()
